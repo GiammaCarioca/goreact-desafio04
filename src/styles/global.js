@@ -15,7 +15,7 @@ injectGlobal`
   body {
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
-    font-family: sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
   }
 
   button {

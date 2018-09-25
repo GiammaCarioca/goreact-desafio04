@@ -1,6 +1,15 @@
 import React from 'react';
 import './styles/global';
+import { Wrapper } from './styles/components';
 
-const App = () => <h1>Go Commerce!</h1>;
+import Header from './components/Header';
+import Content from './components/Content';
+
+const App = () => (
+  <Wrapper>
+    <Header />
+    <Content />
+  </Wrapper>
+);
 
 export default App;
