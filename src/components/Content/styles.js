@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   max-width: 980px;
@@ -11,7 +12,7 @@ export const Wrapper = styled.ul`
   flex-wrap: wrap;
 `;
 
-export const Product = styled.li`
+export const Product = styled(Link)`
   margin-top: 20px;
   margin-right: 20px;
   border: 1px solid #eee;
@@ -24,6 +25,8 @@ export const Product = styled.li`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
+  color: #000;
 
   img {
     margin-bottom: 15px;
@@ -40,7 +43,7 @@ export const Product = styled.li`
     font-size: 14px;
   }
 
-  spam {
+  span {
     margin-top: 10px;
     margin-bottom: 30px;
     color: #37bea9;

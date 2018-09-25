@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.header`
   max-width: 980px;
@@ -21,10 +22,11 @@ export const Logo = styled.div`
   font-weight: bold;
 `;
 
-export const Cart = styled.div`
+export const Cart = styled(Link)`
   color: #999;
   font-size: 16px;
   display: flex;
+  text-decoration: none;
 
   svg {
     fill: #999;

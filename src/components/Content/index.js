@@ -7,53 +7,53 @@ import Moletom from '../../assets/images/moletom@2x.png';
 const Content = () => (
   <Container>
     <Wrapper>
-      <Product>
+      <Product to="/products/1">
         <img src={Camiseta} alt="camiseta trok" />
         <strong>Camiseta Trok</strong>
         <p>Element</p>
-        <spam>R$ 50,00</spam>
+        <span>R$ 50,00</span>
       </Product>
-      <Product>
+      <Product to="/products/1">
         <img src={Moletom} alt="moletom trok" />
         <strong>Moletom Trok</strong>
         <p>Element</p>
-        <spam>R$ 50,00</spam>
+        <span>R$ 50,00</span>
       </Product>
-      <Product>
+      <Product to="/products/1">
         <img src={Camiseta} alt="camiseta trok" />
         <strong>Camiseta Trok</strong>
         <p>Element</p>
-        <spam>R$ 50,00</spam>
+        <span>R$ 50,00</span>
       </Product>
-      <Product>
+      <Product to="/products/1">
         <img src={Moletom} alt="moletom trok" />
         <strong>Moletom Trok</strong>
         <p>Element</p>
-        <spam>R$ 50,00</spam>
+        <span>R$ 50,00</span>
       </Product>
-      <Product>
+      <Product to="/products/1">
         <img src={Camiseta} alt="camiseta trok" />
         <strong>Camiseta Trok</strong>
         <p>Element</p>
-        <spam>R$ 50,00</spam>
+        <span>R$ 50,00</span>
       </Product>
-      <Product>
+      <Product to="/products/1">
         <img src={Moletom} alt="moletom trok" />
         <strong>Moletom Trok</strong>
         <p>Element</p>
-        <spam>R$ 50,00</spam>
+        <span>R$ 50,00</span>
       </Product>
-      <Product>
+      <Product to="/products/1">
         <img src={Camiseta} alt="camiseta trok" />
         <strong>Camiseta Trok</strong>
         <p>Element</p>
-        <spam>R$ 50,00</spam>
+        <span>R$ 50,00</span>
       </Product>
-      <Product>
+      <Product to="/products/1">
         <img src={Moletom} alt="moletom trok" />
         <strong>Moletom Trok</strong>
         <p>Element</p>
-        <spam>R$ 50,00</spam>
+        <span>R$ 50,00</span>
       </Product>
     </Wrapper>
   </Container>
