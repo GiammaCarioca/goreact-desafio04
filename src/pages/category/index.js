@@ -4,16 +4,8 @@ import { Container } from './styles';
 
 import Product from '../../components/Product';
 
-const Browse = () => (
+const Category = () => (
   <Container to="/categories/1">
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
     <Product />
     <Product />
     <Product />
@@ -25,4 +17,4 @@ const Browse = () => (
   </Container>
 );
 
-export default Browse;
+export default Category;

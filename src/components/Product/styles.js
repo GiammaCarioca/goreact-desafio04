@@ -1,32 +1,16 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const Container = styled.div`
-  max-width: 980px;
-  display: flex;
-`;
-
-export const Wrapper = styled.ul`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-`;
-
-export const Product = styled(Link)`
-  margin-top: 20px;
-  margin-right: 20px;
+export const Item = styled(Link)`
+  margin: 20px 20px 0 0;
+  padding: 30px 49px;
   border: 1px solid #eee;
   border-radius: 3px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-left: 49px;
-  padding-right: 49px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  color: #000;
 
   img {
     margin-bottom: 15px;
@@ -35,6 +19,7 @@ export const Product = styled(Link)`
   }
 
   strong {
+    color: #000;
     font-size: 18px;
   }
 
@@ -45,7 +30,6 @@ export const Product = styled(Link)`
 
   span {
     margin-top: 10px;
-    margin-bottom: 30px;
     color: #37bea9;
     font-size: 24px;
     font-weight: bold;

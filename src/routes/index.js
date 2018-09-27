@@ -3,14 +3,16 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Browse from '../pages/browse';
+import Category from '../pages/category';
 import Product from '../pages/product';
-import Cart from '../pages/cart';
+import Checkout from '../pages/checkout';
 
 const Routes = () => (
   <Switch>
     <Route exact path="/" component={Browse} />
     <Route path="/products/:id" component={Product} />
-    <Route path="/cart" component={Cart} />
+    <Route path="/checkout" component={Checkout} />
+    <Route path="/categories/:id" component={Category} />
   </Switch>
 );
 

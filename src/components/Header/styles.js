@@ -1,25 +1,30 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const Container = styled.header`
+export const Wrapper = styled.div`
   max-width: 980px;
-  background: #fff;
   display: flex;
   flex-direction: column;
 `;
 
-export const Wrapper = styled.div`
+/*
+ * Header
+ */
+
+export const Container = styled.header`
   height: 54px;
+  background: #fff;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 `;
 
-export const Logo = styled.div`
+export const Logo = styled(Link)`
   color: #ff9696;
   font-size: 40px;
   font-weight: bold;
+  text-decoration: none;
 `;
 
 export const Cart = styled(Link)`
@@ -31,20 +36,18 @@ export const Cart = styled(Link)`
   svg {
     fill: #999;
     margin-right: 5px;
-    justify-content: space-between;
-    align-items: center;
   }
 `;
 
-export const Menu = styled.nav`
+/*
+ * Navigation
+ */
+
+export const Nav = styled.nav`
   width: 980px;
   height: 54px;
+  border-radius: 3px;
   background: #ff9696;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 16px;
-  font-weight: bold;
-  text-transform: uppercase;
-  padding: 20px;
   display: flex;
 
   ul {
@@ -54,15 +57,19 @@ export const Menu = styled.nav`
 
     li {
       list-style: none;
-      padding: 10px;
-
-      &:first-child {
-        color: #fff;
-      }
-
-      &:hover {
-        color: #fff;
-      }
     }
+  }
+`;
+
+export const Category = styled(Link)`
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-left: 20px;
+
+  &:hover {
+    color: #fff;
   }
 `;
