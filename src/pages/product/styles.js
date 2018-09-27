@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Wrapper = styled.div`
   width: 980px;
   margin-top: 20px;
   display: flex;
@@ -11,13 +11,13 @@ export const Container = styled.div`
 export const Image = styled.div`
   border: 1px solid #eee;
   border-radius: 3px;
-  padding: 50px 100px 50px 100px;
+  padding: 50px 100px;
 `;
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
+  width: 450px;
   display: flex;
   flex-direction: column;
-  align-self: flex-start;
 
   strong {
     text-decoration: none;
@@ -32,8 +32,7 @@ export const Wrapper = styled.div`
   }
 
   span {
-    margin-top: 50px;
-    margin-bottom: 12px;
+    margin: 50px 0 24px 0;
     color: #37bea9;
     font-size: 36px;
     font-weight: bold;
@@ -42,8 +41,7 @@ export const Wrapper = styled.div`
   button {
     border: none;
     border-radius: 3px;
-    margin-top: 12px;
-    padding: 15px 135px;
+    padding: 15px 0;
     background: #37bea9;
     color: #fff;
     font-size: 16px;

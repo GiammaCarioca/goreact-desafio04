@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
-  max-width: 980px;
+  width: 980px;
   display: flex;
   flex-direction: column;
 `;
@@ -44,7 +44,6 @@ export const Cart = styled(Link)`
  */
 
 export const Nav = styled.nav`
-  width: 980px;
   height: 54px;
   border-radius: 3px;
   background: #ff9696;

@@ -2,14 +2,12 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Item = styled(Link)`
-  margin: 20px 20px 0 0;
-  padding: 30px 49px;
+  margin-top: 20px;
+  padding: 30px 50px;
   border: 1px solid #eee;
   border-radius: 3px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-decoration: none;
 
   img {
