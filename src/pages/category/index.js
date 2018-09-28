@@ -1,20 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import { Container } from './styles';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as ProductsActions } from '../../store/ducks/products';
 
-import Product from '../../components/Product';
+import { Container, Product } from './styles';
 
-const Category = () => (
-  <Container to="/categories/1">
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-  </Container>
-);
+class Category extends Component {
+  componentDidMount() {
+    this.loadProducts();
+  }
 
-export default Category;
+  loadProducts = () => {
+    const { id } = this.props.match.params;
+
+    this.props.getProductsRequest(id);
+  };
+
+  render() {
+    return (
+      <Container>
+        {this.props.products.data.map(product => (
+          <Product key={product.id} to="/products/:id">
+            <img src={product.image} alt="camiseta" />
+            <strong>{product.name}</strong>
+            <p>{product.brand}</p>
+            <span>
+              R$
+              {product.price}
+            </span>
+          </Product>
+        ))}
+      </Container>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  products: state.products,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(ProductsActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Category);
