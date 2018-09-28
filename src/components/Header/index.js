@@ -42,7 +42,7 @@ class Header extends Component {
           <ul>
             {this.props.categories.data.map(category => (
               <li key={category.id}>
-                <Category to={`categories/${category.id}`}>{category.title}</Category>
+                <Category to={`/category_products/${category.id}`}>{category.title}</Category>
               </li>
             ))}
           </ul>

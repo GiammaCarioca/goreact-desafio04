@@ -1,17 +1,16 @@
 import React from 'react';
+
 import { Container, Image, Wrapper } from './styles';
 
-import Camiseta from '../../assets/images/camisa@2x.png';
-
 const Product = () => (
-  <Wrapper to="/products/1">
+  <Wrapper>
     <Image>
-      <img src={Camiseta} alt="camiseta trok" />
+      <img src="" alt="camiseta" />
     </Image>
     <Container>
-      <strong>Camiseta Trok</strong>
-      <p>Element</p>
-      <span>R$ 50,00</span>
+      <strong />
+      <p />
+      <span>R$</span>
       <button type="submit">Adicionar ao carrinho</button>
     </Container>
   </Wrapper>

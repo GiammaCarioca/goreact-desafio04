@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
+import { Spinner } from '../../components/Loading/styles';
 
 export const Container = styled.div`
   max-width: 980px;
@@ -7,6 +8,19 @@ export const Container = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
+
+  ${Spinner} {
+    height: 48px;
+    background-color: black;
+  }
+
+  ${props => props.loading
+    && css`
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    `};
 `;
 
 export const Product = styled(Link)`

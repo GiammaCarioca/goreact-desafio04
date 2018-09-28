@@ -6,9 +6,17 @@ import { Creators as ProductsActions } from '../../store/ducks/products';
 
 import { Container, Product } from './styles';
 
+import Loading from '../../components/Loading';
+
 class Category extends Component {
   componentDidMount() {
     this.loadProducts();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.loadProducts();
+    }
   }
 
   loadProducts = () => {
@@ -17,21 +25,29 @@ class Category extends Component {
     this.props.getProductsRequest(id);
   };
 
+  renderProducts = () => (
+    <Container>
+      {this.props.products.data.map(product => (
+        <Product key={product.id} to={`/products/${product.id}`}>
+          <img src={product.image} alt="camiseta" />
+          <strong>{product.name}</strong>
+          <p>{product.brand}</p>
+          <span>
+            R$
+            {product.price}
+          </span>
+        </Product>
+      ))}
+    </Container>
+  );
+
   render() {
-    return (
-      <Container>
-        {this.props.products.data.map(product => (
-          <Product key={product.id} to="/products/:id">
-            <img src={product.image} alt="camiseta" />
-            <strong>{product.name}</strong>
-            <p>{product.brand}</p>
-            <span>
-              R$
-              {product.price}
-            </span>
-          </Product>
-        ))}
+    return this.props.products.loading ? (
+      <Container loading>
+        <Loading />
       </Container>
+    ) : (
+      this.renderProducts()
     );
   }
 }
