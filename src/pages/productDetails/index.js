@@ -6,7 +6,7 @@ import { Creators as ProductsActions } from '../../store/ducks/products';
 
 import { Container, Image, Wrapper } from './styles';
 
-const Product = () => (
+const productDetails = () => (
   <Wrapper>
     <Image>
       <img src="" alt="camiseta" />
@@ -32,4 +32,4 @@ const mapDispatchToProps = dispatch => bindActionCreators(ProductsActions, dispa
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Product);
+)(productDetails);
