@@ -8,7 +8,7 @@ import {
   Wrapper, ProductDetails, Image, Container,
 } from './styles';
 
-const Product = ({ products, match }) => (
+const Product = ({ products, match, addProduct }) => (
   <Wrapper>
     {products.data.filter(product => product.id === parseInt(match.params.id, 10)).map(product => (
       <ProductDetails key={product.id}>
@@ -22,7 +22,9 @@ const Product = ({ products, match }) => (
             R$
             {product.price}
           </span>
-          <button type="submit">Adicionar ao carrinho</button>
+          <button type="button" onClick={() => addProduct(product)}>
+            Adicionar ao carrinho
+          </button>
         </Container>
       </ProductDetails>
     ))}

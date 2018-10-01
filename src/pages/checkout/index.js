@@ -1,9 +1,14 @@
 import React, { Fragment } from 'react';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as ProductsActions } from '../../store/ducks/products';
+
 import { ShoppingList, Soma } from './styles';
 
 import Camiseta from '../../assets/images/camisa@2x.png';
 
-const Checkout = () => (
+const Checkout = ({ products }) => (
   <Fragment>
     <ShoppingList cellPadding={0} cellSpacing={0}>
       <thead>
@@ -17,84 +22,32 @@ const Checkout = () => (
       </thead>
 
       <tbody>
-        <tr>
-          <td>
-            <img src={Camiseta} alt="camiseta trok" />
-          </td>
-          <td>
-            <strong>Camiseta Trok</strong>
-            <p>Element</p>
-          </td>
-          <td>
-            <span>R$ 50,00</span>
-          </td>
-          <td>
-            <div>2</div>
-          </td>
-          <td>R$ 100,00</td>
-          <td>
-            <button type="submit">
-              <i className="fa fa-times" />
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <img src={Camiseta} alt="camiseta trok" />
-          </td>
-          <td>
-            <strong>Camiseta Trok</strong>
-            <p>Element</p>
-          </td>
-          <td>R$ 50,00</td>
-          <td>
-            <div>2</div>
-          </td>
-          <td>R$ 100,00</td>
-          <td>
-            <button type="submit">
-              <i className="fa fa-times" />
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <img src={Camiseta} alt="camiseta trok" />
-          </td>
-          <td>
-            <strong>Camiseta Trok</strong>
-            <p>Element</p>
-          </td>
-          <td>R$ 50,00</td>
-          <td>
-            <div>2</div>
-          </td>
-          <td>R$ 100,00</td>
-          <td>
-            <button type="submit">
-              <i className="fa fa-times" />
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <img src={Camiseta} alt="camiseta trok" />
-          </td>
-          <td>
-            <strong>Camiseta Trok</strong>
-            <p>Element</p>
-          </td>
-          <td>R$ 50,00</td>
-          <td>
-            <div>2</div>
-          </td>
-          <td>R$ 100,00</td>
-          <td>
-            <button type="submit">
-              <i className="fa fa-times" />
-            </button>
-          </td>
-        </tr>
+        {products.cart.map(product => (
+          <tr key={product.id}>
+            <td>
+              <img src={product.image} alt="camiseta trok" />
+            </td>
+            <td>
+              <strong>{product.name}</strong>
+              <p>{product.brand}</p>
+            </td>
+            <td>
+              <span>
+R$
+                {product.price}
+              </span>
+            </td>
+            <td>
+              <div>2</div>
+            </td>
+            <td>R$ 100,00</td>
+            <td>
+              <button type="submit">
+                <i className="fa fa-times" />
+              </button>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </ShoppingList>
     <Soma>
@@ -104,4 +57,13 @@ const Checkout = () => (
   </Fragment>
 );
 
-export default Checkout;
+const mapStateToProps = state => ({
+  products: state.products,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(ProductsActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Checkout);
