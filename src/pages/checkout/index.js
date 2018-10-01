@@ -6,9 +6,7 @@ import { Creators as ProductsActions } from '../../store/ducks/products';
 
 import { ShoppingList, Soma } from './styles';
 
-import Camiseta from '../../assets/images/camisa@2x.png';
-
-const Checkout = ({ products }) => (
+const Checkout = ({ products, removeProduct }) => (
   <Fragment>
     <ShoppingList cellPadding={0} cellSpacing={0}>
       <thead>
@@ -33,7 +31,7 @@ const Checkout = ({ products }) => (
             </td>
             <td>
               <span>
-R$
+                R$
                 {product.price}
               </span>
             </td>
@@ -42,7 +40,7 @@ R$
             </td>
             <td>R$ 100,00</td>
             <td>
-              <button type="submit">
+              <button type="submit" onClick={() => removeProduct(product.id)}>
                 <i className="fa fa-times" />
               </button>
             </td>
