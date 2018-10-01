@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div``;
+
+export const ProductDetails = styled.div`
   width: 980px;
   margin-top: 20px;
   display: flex;

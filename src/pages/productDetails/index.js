@@ -4,22 +4,28 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as ProductsActions } from '../../store/ducks/products';
 
-import { Container, Image, Wrapper } from './styles';
+import {
+  Wrapper, ProductDetails, Image, Container,
+} from './styles';
 
-const productDetails = () => (
+const Product = ({ products, match }) => (
   <Wrapper>
-    <Image>
-      <img src="" alt="camiseta" />
-    </Image>
-    <Container>
-      <strong>{}</strong>
-      <p>{}</p>
-      <span>
-        R$
-        {}
-      </span>
-      <button type="submit">Adicionar ao carrinho</button>
-    </Container>
+    {products.data.filter(product => product.id === parseInt(match.params.id, 10)).map(product => (
+      <ProductDetails key={product.id}>
+        <Image>
+          <img src={product.image} alt="camiseta" />
+        </Image>
+        <Container>
+          <strong>{product.name}</strong>
+          <p>{product.brand}</p>
+          <span>
+            R$
+            {product.price}
+          </span>
+          <button type="submit">Adicionar ao carrinho</button>
+        </Container>
+      </ProductDetails>
+    ))}
   </Wrapper>
 );
 
@@ -32,4 +38,4 @@ const mapDispatchToProps = dispatch => bindActionCreators(ProductsActions, dispa
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(productDetails);
+)(Product);

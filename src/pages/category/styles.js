@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Spinner } from '../../components/Loading/styles';
 
-export const Container = styled.div`
+export const Container = styled.section`
   max-width: 980px;
   display: flex;
   flex-direction: row;

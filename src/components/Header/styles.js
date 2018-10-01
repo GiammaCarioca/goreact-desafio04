@@ -71,4 +71,8 @@ export const Category = styled(Link)`
   &:hover {
     color: #fff;
   }
+
+  &:active {
+    color: #000;
+  }
 `;
