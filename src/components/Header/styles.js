@@ -56,23 +56,19 @@ export const Nav = styled.nav`
 
     li {
       list-style: none;
+      margin-left: 20px;
     }
   }
 `;
 
 export const Category = styled(Link)`
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.6);
   font-size: 16px;
   font-weight: bold;
   text-transform: uppercase;
-  padding-left: 20px;
+  color: ${props => (props.selected ? '#fff' : 'rgba(255, 255, 255, 0.6)')};
 
   &:hover {
     color: #fff;
-  }
-
-  &:active {
-    color: #000;
   }
 `;

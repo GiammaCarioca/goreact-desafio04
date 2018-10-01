@@ -10,6 +10,10 @@ import {
 } from './styles';
 
 class Header extends Component {
+  state = {
+    selectedCategory: null,
+  };
+
   static propTypes = {
     getCategoriesRequest: PropTypes.func.isRequired,
     categories: PropTypes.shape({
@@ -42,7 +46,13 @@ class Header extends Component {
           <ul>
             {this.props.categories.data.map(category => (
               <li key={category.id}>
-                <Category to={`/category_products/${category.id}`}>{category.title}</Category>
+                <Category
+                  to={`/category_products/${category.id}`}
+                  onClick={() => this.setState({ selectedCategory: category.id })}
+                  selected={this.state.selectedCategory === category.id}
+                >
+                  {category.title}
+                </Category>
               </li>
             ))}
           </ul>
