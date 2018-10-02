@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   data: [],
   loading: false,
   cart: [],
-  quantity: 0,
+  quantityTotal: 0,
 };
 
 export default function products(state = INITIAL_STATE, action) {
@@ -19,12 +19,10 @@ export default function products(state = INITIAL_STATE, action) {
     case Types.GET_SUCCESS:
       return { ...state, loading: false, data: action.payload.data };
     case Types.ADD_TO_CART:
-      const result = state.cart.find(item => item.id === action.payload.product.id);
-
-      if (result === undefined) {
+      if (state.cart.find(item => item.id === action.payload.product.id) === undefined) {
         return {
           ...state,
-          quantity: state.quantity + 1,
+          quantityTotal: state.quantityTotal + 1,
           cart: [
             ...state.cart,
             {
@@ -40,14 +38,14 @@ export default function products(state = INITIAL_STATE, action) {
       }
       return {
         ...state,
-        quantity: state.quantity + 1,
+        quantityTotal: state.quantityTotal + 1,
         cart: [...state.cart],
       };
 
     case Types.REMOVE_FROM_CART:
       return {
         ...state,
-        quantity: state.quantity - 1,
+        quantity: state.quantityTotal - 1,
         cart: [...state.cart.filter(product => product.id !== action.payload.id)],
       };
     default:
