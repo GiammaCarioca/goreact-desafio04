@@ -3,8 +3,6 @@ import styled from 'styled-components';
 export const ShoppingList = styled.table`
   width: 980px;
   margin-top: 20px;
-  border: 1px solid #eee;
-  border-radius: 3px;
 
   thead th {
     padding: 20px 0 20px 0;
@@ -68,27 +66,5 @@ export const ShoppingList = styled.table`
       font-size: 16px;
       color: #999;
     }
-  }
-`;
-
-export const Soma = styled.div`
-  position: absolute;
-  left: 770px;
-  top: 650px;
-  display: flex;
-  align-items: center;
-
-  strong {
-    font-size: 18px;
-    font-weight: bold;
-    color: #999;
-    text-transform: uppercase;
-  }
-
-  span {
-    margin-left: 15px;
-    color: #37bea9;
-    font-size: 30px;
-    font-weight: bold;
   }
 `;

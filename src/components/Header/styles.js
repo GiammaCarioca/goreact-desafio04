@@ -69,6 +69,6 @@ export const Category = styled(Link)`
   color: ${props => (props.selected ? '#fff' : 'rgba(255, 255, 255, 0.6)')};
 
   &:hover {
-    color: #fff;
+    text-decoration: ${props => (props.selected ? 'none' : 'underline')};
   }
 `;

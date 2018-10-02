@@ -13,7 +13,7 @@ const Product = ({ products, match, addProduct }) => (
     {products.data.filter(product => product.id === parseInt(match.params.id, 10)).map(product => (
       <ProductDetails key={product.id}>
         <Image>
-          <img src={product.image} alt="camiseta" />
+          <img src={product.image} alt={product.name} />
         </Image>
         <Container>
           <strong>{product.name}</strong>

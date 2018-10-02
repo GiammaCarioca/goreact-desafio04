@@ -1,14 +1,15 @@
 export const Types = {
   GET_REQUEST: 'products/GET_REQUEST',
   GET_SUCCESS: 'products/GET_SUCCESS',
-  ADD_PRODUCT: 'products/ADD_PRODUCT',
-  REMOVE_PRODUCT: 'products/REMOVE_PRODUCT',
+  ADD_TO_CART: 'products/ADD_TO_CART',
+  REMOVE_FROM_CART: 'products/REMOVE_FROM_CART',
 };
 
 const INITIAL_STATE = {
   data: [],
   loading: false,
   cart: [],
+  quantity: 0,
 };
 
 export default function products(state = INITIAL_STATE, action) {
@@ -17,9 +18,10 @@ export default function products(state = INITIAL_STATE, action) {
       return { ...state, loading: true };
     case Types.GET_SUCCESS:
       return { ...state, loading: false, data: action.payload.data };
-    case Types.ADD_PRODUCT:
+    case Types.ADD_TO_CART:
       return {
         ...state,
+        quantity: state.quantity + 1,
         cart: [
           ...state.cart,
           {
@@ -28,13 +30,13 @@ export default function products(state = INITIAL_STATE, action) {
             brand: action.payload.product.brand,
             image: action.payload.product.image,
             price: action.payload.product.price,
-            quantity: 1,
           },
         ],
       };
-    case Types.REMOVE_PRODUCT:
+    case Types.REMOVE_FROM_CART:
       return {
         ...state,
+        quantity: state.quantity - 1,
         cart: [...state.cart.filter(product => product.id !== action.payload.id)],
       };
     default:
@@ -54,12 +56,12 @@ export const Creators = {
   }),
 
   addProduct: product => ({
-    type: Types.ADD_PRODUCT,
+    type: Types.ADD_TO_CART,
     payload: { product },
   }),
 
   removeProduct: id => ({
-    type: Types.REMOVE_PRODUCT,
+    type: Types.REMOVE_FROM_CART,
     payload: { id },
   }),
 };
