@@ -5,9 +5,9 @@ import { Creators as ProductsActions } from '../ducks/products';
 
 export function* getProducts(action) {
   try {
-    const response = yield call(api.get, `/category_products/${action.payload.id}/products`);
+    const response = yield call(api.get, `/category_products/${action.payload.id}`);
 
-    yield put(ProductsActions.getProductsSuccess(response.data));
+    yield put(ProductsActions.getProductsSuccess(response.data.products));
   } catch (error) {
     console.log(error);
   }
