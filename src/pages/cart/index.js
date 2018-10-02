@@ -6,7 +6,7 @@ import { Creators as ProductsActions } from '../../store/ducks/products';
 
 import { ShoppingList } from './styles';
 
-const Checkout = ({ products, removeProduct }) => (
+const Cart = ({ products, removeProduct, quantity }) => (
   <ShoppingList cellPadding={0} cellSpacing={0}>
     {!!products.quantity && (
       <thead>
@@ -59,4 +59,4 @@ const mapDispatchToProps = dispatch => bindActionCreators(ProductsActions, dispa
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Checkout);
+)(Cart);

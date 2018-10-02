@@ -19,20 +19,31 @@ export default function products(state = INITIAL_STATE, action) {
     case Types.GET_SUCCESS:
       return { ...state, loading: false, data: action.payload.data };
     case Types.ADD_TO_CART:
+      const result = state.cart.find(item => item.id === action.payload.product.id);
+
+      if (result === undefined) {
+        return {
+          ...state,
+          quantity: state.quantity + 1,
+          cart: [
+            ...state.cart,
+            {
+              id: action.payload.product.id,
+              name: action.payload.product.name,
+              brand: action.payload.product.brand,
+              image: action.payload.product.image,
+              price: action.payload.product.price,
+              quantity: 1,
+            },
+          ],
+        };
+      }
       return {
         ...state,
         quantity: state.quantity + 1,
-        cart: [
-          ...state.cart,
-          {
-            id: action.payload.product.id,
-            name: action.payload.product.name,
-            brand: action.payload.product.brand,
-            image: action.payload.product.image,
-            price: action.payload.product.price,
-          },
-        ],
+        cart: [...state.cart],
       };
+
     case Types.REMOVE_FROM_CART:
       return {
         ...state,
