@@ -36,7 +36,7 @@ const Checkout = ({ products, removeProduct }) => (
               </span>
             </td>
             <td>
-              <div>2</div>
+              <div>{product.quantity}</div>
             </td>
             <td>R$ 100,00</td>
             <td>

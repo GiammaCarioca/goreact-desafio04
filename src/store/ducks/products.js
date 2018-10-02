@@ -20,7 +20,17 @@ export default function products(state = INITIAL_STATE, action) {
     case Types.ADD_PRODUCT:
       return {
         ...state,
-        cart: [...state.cart, action.payload.product],
+        cart: [
+          ...state.cart,
+          {
+            id: action.payload.product.id,
+            name: action.payload.product.name,
+            brand: action.payload.product.brand,
+            image: action.payload.product.image,
+            price: action.payload.product.price,
+            quantity: 1,
+          },
+        ],
       };
     case Types.REMOVE_PRODUCT:
       return {
