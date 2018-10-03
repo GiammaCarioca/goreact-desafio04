@@ -3,6 +3,8 @@ export const Types = {
   GET_SUCCESS: 'products/GET_SUCCESS',
   ADD_TO_CART: 'products/ADD_TO_CART',
   REMOVE_FROM_CART: 'products/REMOVE_FROM_CART',
+  INCREASE_ITEM: 'products/INCREASE_ITEM',
+  DECREASE_ITEM: 'products/DECREASE_ITEM',
 };
 
 const INITIAL_STATE = {
@@ -33,7 +35,7 @@ export default function products(state = INITIAL_STATE, action) {
               brand: action.payload.product.brand,
               image: action.payload.product.image,
               price: action.payload.product.price,
-              quantity: 1,
+              quantity: +1,
             },
           ],
         };
@@ -47,9 +49,22 @@ export default function products(state = INITIAL_STATE, action) {
     case Types.REMOVE_FROM_CART:
       return {
         ...state,
-        quantity: state.quantityTotal - 1,
+        quantityTotal: state.quantityTotal - 1,
         cart: [...state.cart.filter(product => product.id !== action.payload.id)],
       };
+
+    case Types.INCREASE_ITEM:
+      return {
+        ...state,
+        quantityTotal: state.quantityTotal + 1,
+      };
+
+    case Types.DECREASE_ITEM:
+      return {
+        ...state,
+        quantityTotal: state.quantityTotal - 1,
+      };
+
     default:
       return state;
   }
@@ -74,5 +89,15 @@ export const Creators = {
   removeProduct: id => ({
     type: Types.REMOVE_FROM_CART,
     payload: { id },
+  }),
+
+  increaseItem: (id, quantidade) => ({
+    type: Types.INCREASE_ITEM,
+    payload: { id, quantidade },
+  }),
+
+  decreaseItem: (id, quantidade) => ({
+    type: Types.DECREASE_ITEM,
+    payload: { id, quantidade },
   }),
 };

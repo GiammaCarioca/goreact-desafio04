@@ -53,13 +53,23 @@ export const ShoppingList = styled.table`
       margin-right: 15px;
     }
 
-    div {
+    form {
       border: 1px solid #eee;
       border-radius: 3px;
       margin-right: 30px;
       padding: 5px 12px;
-      font-size: 14px;
-      color: #999;
+
+      input {
+        width: 20px;
+        border: none;
+        font-size: 14px;
+        color: #999;
+
+        &::placeholder {
+          font-size: 14px;
+          color: #999;
+        }
+      }
     }
 
     button {
