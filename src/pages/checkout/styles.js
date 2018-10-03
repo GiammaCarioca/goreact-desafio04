@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+export const Container = styled.div``;
+
 export const ShoppingList = styled.table`
   width: 980px;
   margin-top: 20px;
@@ -66,5 +68,27 @@ export const ShoppingList = styled.table`
       font-size: 16px;
       color: #999;
     }
+  }
+`;
+
+export const SomaTotal = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+
+  strong {
+    font-size: 18px;
+    font-weight: bold;
+    color: #999;
+    text-transform: uppercase;
+  }
+
+  span {
+    margin-left: 15px;
+    color: #37bea9;
+    font-size: 30px;
+    font-weight: bold;
   }
 `;

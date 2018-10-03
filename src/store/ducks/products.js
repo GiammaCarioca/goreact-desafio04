@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   loading: false,
   cart: [],
   quantityTotal: 0,
+  sum: [],
 };
 
 export default function products(state = INITIAL_STATE, action) {
@@ -23,6 +24,7 @@ export default function products(state = INITIAL_STATE, action) {
         return {
           ...state,
           quantityTotal: state.quantityTotal + 1,
+          sum: [...state.sum, action.payload.product.price],
           cart: [
             ...state.cart,
             {
