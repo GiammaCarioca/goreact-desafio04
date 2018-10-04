@@ -8,20 +8,25 @@ import { Container, ShoppingList, SomaTotal } from './styles';
 
 class Cart extends Component {
   state = {
-    userInput: '',
+    userInput: 1,
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  selectQuantity = (e, product) => {
+    this.setState({ userInput: e.target.value });
 
+    const { id } = product;
     const { userInput } = this.state;
+    const newQuantity = userInput;
+    const subtotal = product.price * newQuantity;
+
+    this.props.selectQuantityItem(id, newQuantity, subtotal);
   };
 
   render() {
     return (
       <Container>
         <ShoppingList cellPadding={0} cellSpacing={0}>
-          {!!this.props.products.quantityTotal && (
+          {!!this.props.products.totalItems && (
             <thead>
               <tr>
                 <th />
@@ -49,21 +54,23 @@ class Cart extends Component {
                   </span>
                 </td>
                 <td>
-                  <form onSubmit={this.handleSubmit}>
+                  <div>
                     <input
-                      type="text"
-                      placeholder="1"
-                      value={this.userInput}
-                      onChange={e => this.setState({ userInput: e.target.value })}
+                      type="number"
+                      value={this.state.userInput}
+                      onChange={e => this.selectQuantity(e, product)}
                     />
-                  </form>
+                  </div>
                 </td>
                 <td>
                   R$
                   {product.price}
                 </td>
                 <td>
-                  <button type="submit" onClick={() => this.props.removeProduct(product.id)}>
+                  <button
+                    type="submit"
+                    onClick={() => this.props.removeProduct(product.id, product.price)}
+                  >
                     <i className="fa fa-times" />
                   </button>
                 </td>
@@ -71,13 +78,13 @@ class Cart extends Component {
             ))}
           </tbody>
         </ShoppingList>
-        {!!this.props.products.quantityTotal && (
+        {!!this.props.products.totalItems && (
           <SomaTotal>
             <strong>Total</strong>
             <span>
               R$
               {' '}
-              {this.props.products.sum.reduce(
+              {this.props.products.totalPrice.reduce(
                 (accumulator, currentValue) => accumulator + currentValue,
                 0,
               )}

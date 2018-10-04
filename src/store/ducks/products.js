@@ -2,17 +2,17 @@ export const Types = {
   GET_REQUEST: 'products/GET_REQUEST',
   GET_SUCCESS: 'products/GET_SUCCESS',
   ADD_TO_CART: 'products/ADD_TO_CART',
+  SELECT_QUANTITY_ITEM: 'products/SELECT_QUANTITY_ITEM',
   REMOVE_FROM_CART: 'products/REMOVE_FROM_CART',
-  INCREASE_ITEM: 'products/INCREASE_ITEM',
-  DECREASE_ITEM: 'products/DECREASE_ITEM',
 };
 
 const INITIAL_STATE = {
-  data: [],
   loading: false,
+  totalItems: 0,
+  data: [],
   cart: [],
-  quantityTotal: 0,
-  sum: [],
+  quantities: [],
+  totalPrice: [],
 };
 
 export default function products(state = INITIAL_STATE, action) {
@@ -25,8 +25,8 @@ export default function products(state = INITIAL_STATE, action) {
       if (state.cart.find(item => item.id === action.payload.product.id) === undefined) {
         return {
           ...state,
-          quantityTotal: state.quantityTotal + 1,
-          sum: [...state.sum, action.payload.product.price],
+          totalItems: state.totalItems + 1,
+          totalPrice: [...state.totalPrice, action.payload.product.price],
           cart: [
             ...state.cart,
             {
@@ -35,34 +35,35 @@ export default function products(state = INITIAL_STATE, action) {
               brand: action.payload.product.brand,
               image: action.payload.product.image,
               price: action.payload.product.price,
-              quantity: +1,
             },
           ],
         };
       }
       return {
         ...state,
-        quantityTotal: state.quantityTotal + 1,
+        totalItems: state.totalItems + 1,
+        totalPrice: [...state.totalPrice, action.payload.product.price],
         cart: [...state.cart],
+      };
+
+    case Types.SELECT_QUANTITY_ITEM:
+      return {
+        ...state,
+        totalItems: state.totalItems + 1,
+        quantities: [
+          ...state.quantities,
+          {
+            id: action.payload.id,
+            newQuantity: action.payload.newQuantity,
+            subtotal: action.payload.subtotal,
+          },
+        ],
       };
 
     case Types.REMOVE_FROM_CART:
       return {
         ...state,
-        quantityTotal: state.quantityTotal - 1,
         cart: [...state.cart.filter(product => product.id !== action.payload.id)],
-      };
-
-    case Types.INCREASE_ITEM:
-      return {
-        ...state,
-        quantityTotal: state.quantityTotal + 1,
-      };
-
-    case Types.DECREASE_ITEM:
-      return {
-        ...state,
-        quantityTotal: state.quantityTotal - 1,
       };
 
     default:
@@ -91,13 +92,8 @@ export const Creators = {
     payload: { id },
   }),
 
-  increaseItem: (id, quantidade) => ({
-    type: Types.INCREASE_ITEM,
-    payload: { id, quantidade },
-  }),
-
-  decreaseItem: (id, quantidade) => ({
-    type: Types.DECREASE_ITEM,
-    payload: { id, quantidade },
+  selectQuantityItem: (id, newQuantity, subtotal) => ({
+    type: Types.SELECT_QUANTITY_ITEM,
+    payload: { id, newQuantity, subtotal },
   }),
 };
