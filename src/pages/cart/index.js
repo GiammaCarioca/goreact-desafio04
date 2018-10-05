@@ -2,31 +2,23 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Creators as ProductsActions } from '../../store/ducks/products';
+import { Creators as CartActions } from '../../store/ducks/cart';
 
 import { Container, ShoppingList, SomaTotal } from './styles';
 
 class Cart extends Component {
-  state = {
-    userInput: 1,
-  };
-
   selectQuantity = (e, product) => {
-    this.setState({ userInput: e.target.value });
-
     const { id } = product;
-    const { userInput } = this.state;
-    const newQuantity = userInput;
-    const subtotal = product.price * newQuantity;
+    const { price } = product;
 
-    this.props.selectQuantityItem(id, newQuantity, subtotal);
+    this.props.selectQuantityItem(id, price);
   };
 
   render() {
     return (
       <Container>
         <ShoppingList cellPadding={0} cellSpacing={0}>
-          {!!this.props.products.totalItems && (
+          {!!this.props.cart.totalItems && (
             <thead>
               <tr>
                 <th />
@@ -38,7 +30,7 @@ class Cart extends Component {
             </thead>
           )}
           <tbody>
-            {this.props.products.cart.map(product => (
+            {this.props.cart.cart.map(product => (
               <tr key={product.id}>
                 <td>
                   <img src={product.image} alt={product.name} />
@@ -48,23 +40,19 @@ class Cart extends Component {
                   <p>{product.brand}</p>
                 </td>
                 <td>
-                  <span>
-                    R$
-                    {product.price}
-                  </span>
+                  <span>{`R$ ${product.price}`}</span>
                 </td>
                 <td>
                   <div>
                     <input
                       type="number"
-                      value={this.state.userInput}
+                      value="1"
                       onChange={e => this.selectQuantity(e, product)}
                     />
                   </div>
                 </td>
                 <td>
-                  R$
-                  {product.price}
+                  <span>{`R$ ${product.price}`}</span>
                 </td>
                 <td>
                   <button
@@ -78,13 +66,14 @@ class Cart extends Component {
             ))}
           </tbody>
         </ShoppingList>
-        {!!this.props.products.totalItems && (
+
+        {!!this.props.cart.totalItems && (
           <SomaTotal>
             <strong>Total</strong>
             <span>
               R$
               {' '}
-              {this.props.products.totalPrice.reduce(
+              {this.props.cart.totalPrice.reduce(
                 (accumulator, currentValue) => accumulator + currentValue,
                 0,
               )}
@@ -98,9 +87,10 @@ class Cart extends Component {
 
 const mapStateToProps = state => ({
   products: state.products,
+  cart: state.cart,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(ProductsActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch);
 
 export default connect(
   mapStateToProps,

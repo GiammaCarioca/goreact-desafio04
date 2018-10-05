@@ -2,7 +2,7 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Creators as ProductsActions } from '../../store/ducks/products';
+import { Creators as CartActions } from '../../store/ducks/cart';
 
 import {
   Wrapper, ProductDetails, Image, Container,
@@ -18,10 +18,7 @@ const Product = ({ products, match, addProduct }) => (
         <Container>
           <strong>{product.name}</strong>
           <p>{product.brand}</p>
-          <span>
-            R$
-            {product.price}
-          </span>
+          <span>{`R$ ${product.price}`}</span>
           <button type="button" onClick={() => addProduct(product)}>
             Adicionar ao carrinho
           </button>
@@ -35,7 +32,7 @@ const mapStateToProps = state => ({
   products: state.products,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(ProductsActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch);
 
 export default connect(
   mapStateToProps,
