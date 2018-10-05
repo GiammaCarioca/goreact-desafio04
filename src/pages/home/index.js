@@ -2,6 +2,6 @@ import React from 'react';
 
 import { Container } from './styles';
 
-const Browse = () => <Container to="/" />;
+const Home = () => <Container to="/" />;
 
-export default Browse;
+export default Home;

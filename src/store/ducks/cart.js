@@ -6,7 +6,6 @@ export const Types = {
 
 const INITIAL_STATE = {
   totalItems: 0,
-  cart: [],
   totalPrice: [],
   addedById: [],
 };
@@ -14,29 +13,21 @@ const INITIAL_STATE = {
 export default function cart(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.ADD_TO_CART:
-      if (
-        state.cart.find(item => item.id === action.payload.product.id) === undefined
-        && state.addedById.find(item => item.id === action.payload.product.id) === undefined
-      ) {
+      if (state.addedById.find(item => item.id === action.payload.product.id) === undefined) {
         return {
           ...state,
           totalItems: state.totalItems + 1,
           totalPrice: [...state.totalPrice, action.payload.product.price],
-          cart: [
-            ...state.cart,
-            {
-              id: action.payload.product.id,
-              name: action.payload.product.name,
-              brand: action.payload.product.brand,
-              image: action.payload.product.image,
-              price: action.payload.product.price,
-            },
-          ],
           addedById: [
             ...state.addedById,
             {
               id: action.payload.product.id,
-              quantity: 1,
+              name: action.payload.product.name,
+              image: action.payload.product.image,
+              price: action.payload.product.price,
+              brand: action.payload.product.brand,
+              quantity: action.payload.product.quantity,
+              subtotal: action.payload.product.price,
             },
           ],
         };
@@ -45,7 +36,6 @@ export default function cart(state = INITIAL_STATE, action) {
         ...state,
         totalItems: state.totalItems + 1,
         totalPrice: [...state.totalPrice, action.payload.product.price],
-        cart: [...state.cart],
         addedById: [
           ...state.addedById,
           state.addedById.find(item => item.id === action.payload.product.id),
@@ -57,13 +47,13 @@ export default function cart(state = INITIAL_STATE, action) {
         ...state,
         totalItems: state.totalItems + 1,
         totalPrice: [...state.totalPrice, action.payload.price],
-        cart: [...state.cart],
+        addedById: [...state.addedById],
       };
 
     case Types.REMOVE_FROM_CART:
       return {
         ...state,
-        cart: [...state.cart.filter(product => product.id !== action.payload.id)],
+        addedById: [...state.addedById.filter(product => product.id !== action.payload.product.id)],
       };
 
     default:
@@ -77,9 +67,9 @@ export const Creators = {
     payload: { product },
   }),
 
-  selectQuantityItem: (id, price) => ({
+  selectQuantityItem: (id, quantity = 1) => ({
     type: Types.SELECT_QUANTITY_ITEM,
-    payload: { id, price },
+    payload: { id, quantity },
   }),
 
   removeProduct: id => ({

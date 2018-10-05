@@ -9,9 +9,7 @@ import { Container, ShoppingList, SomaTotal } from './styles';
 class Cart extends Component {
   selectQuantity = (e, product) => {
     const { id } = product;
-    const { price } = product;
-
-    this.props.selectQuantityItem(id, price);
+    this.props.selectQuantityItem(id, e.target.value);
   };
 
   render() {
@@ -30,7 +28,7 @@ class Cart extends Component {
             </thead>
           )}
           <tbody>
-            {this.props.cart.cart.map(product => (
+            {this.props.cart.addedById.map(product => (
               <tr key={product.id}>
                 <td>
                   <img src={product.image} alt={product.name} />
@@ -46,7 +44,7 @@ class Cart extends Component {
                   <div>
                     <input
                       type="number"
-                      value="1"
+                      value={product.quantity}
                       onChange={e => this.selectQuantity(e, product)}
                     />
                   </div>
