@@ -8,6 +8,12 @@ import {
   Wrapper, ProductDetails, Image, Container,
 } from './styles';
 
+const intlMonetary = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+  minimunFractionDigits: 2,
+});
+
 const Product = ({ products, match, addProduct }) => (
   <Wrapper>
     {products.data.filter(product => product.id === parseInt(match.params.id, 10)).map(product => (
@@ -18,7 +24,7 @@ const Product = ({ products, match, addProduct }) => (
         <Container>
           <strong>{product.name}</strong>
           <p>{product.brand}</p>
-          <span>{`R$ ${product.price}`}</span>
+          <span>{intlMonetary.format(product.price)}</span>
           <button type="button" value="1" onClick={e => addProduct(product, e.target.value)}>
             Adicionar ao carrinho
           </button>

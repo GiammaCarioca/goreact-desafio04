@@ -8,6 +8,12 @@ import { Container, Product } from './styles';
 
 import Loading from '../../components/Loading';
 
+const intlMonetary = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+  minimunFractionDigits: 2,
+});
+
 class Category extends Component {
   componentDidMount() {
     this.loadProducts();
@@ -32,10 +38,7 @@ class Category extends Component {
           <img src={product.image} alt="camiseta" />
           <strong>{product.name}</strong>
           <p>{product.brand}</p>
-          <span>
-            R$
-            {product.price}
-          </span>
+          <span>{intlMonetary.format(product.price)}</span>
         </Product>
       ))}
     </Container>

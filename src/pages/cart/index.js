@@ -6,6 +6,12 @@ import { Creators as CartActions } from '../../store/ducks/cart';
 
 import { Container, ShoppingList, SomaTotal } from './styles';
 
+const intlMonetary = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+  minimunFractionDigits: 2,
+});
+
 class Cart extends Component {
   render() {
     return (
@@ -33,7 +39,7 @@ class Cart extends Component {
                   <p>{product.brand}</p>
                 </td>
                 <td>
-                  <span>{`R$ ${product.price}`}</span>
+                  <span>{intlMonetary.format(product.price)}</span>
                 </td>
                 <td>
                   <div>
@@ -64,11 +70,11 @@ class Cart extends Component {
           <SomaTotal>
             <strong>Total</strong>
             <span>
-              R$
-              {' '}
-              {this.props.cart.totalPrice.reduce(
-                (accumulator, currentValue) => accumulator + currentValue,
-                0,
+              {intlMonetary.format(
+                this.props.cart.totalPrice.reduce(
+                  (accumulator, currentValue) => accumulator + currentValue,
+                  0,
+                ),
               )}
             </span>
           </SomaTotal>
