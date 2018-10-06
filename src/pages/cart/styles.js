@@ -49,6 +49,10 @@ export const ShoppingList = styled.table`
       font-weight: bold;
     }
 
+    &:nth-child(5) {
+      min-width: 140px;
+    }
+
     span {
       margin-right: 15px;
     }
@@ -99,6 +103,9 @@ export const SomaTotal = styled.div`
   }
 
   span {
+    display: flex;
+    justify-content: flex-start;
+    min-width: 180px;
     margin-left: 15px;
     color: #37bea9;
     font-size: 30px;

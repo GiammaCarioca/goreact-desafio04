@@ -10,8 +10,8 @@ export const Container = styled.section`
   justify-content: space-evenly;
 
   ${Spinner} {
-    height: 48px;
-    background-color: black;
+    height: 80px;
+    background-color: #FFFFFF;
   }
 
   ${props => props.loading

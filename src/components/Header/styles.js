@@ -37,6 +37,13 @@ export const Cart = styled(Link)`
     fill: #999;
     margin-right: 5px;
   }
+
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 28px;
+  }
 `;
 
 /*
