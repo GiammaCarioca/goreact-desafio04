@@ -30,18 +30,6 @@ export default function cart(state = INITIAL_STATE, action) {
       }
       return {
         ...state,
-        addedById: [
-          ...state.addedById.filter(product => product.id !== action.payload.id),
-          {
-            id: action.payload.id,
-            name: action.payload.name,
-            image: action.payload.image,
-            price: action.payload.price,
-            brand: action.payload.brand,
-            quantity: action.payload.quantity + 1,
-            subtotal: action.payload.price,
-          },
-        ],
       };
 
     case Types.SELECT_QUANTITY:

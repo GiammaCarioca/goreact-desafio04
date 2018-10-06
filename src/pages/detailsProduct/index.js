@@ -19,7 +19,7 @@ const Product = ({ products, match, addProduct }) => (
           <strong>{product.name}</strong>
           <p>{product.brand}</p>
           <span>{`R$ ${product.price}`}</span>
-          <button type="button" onClick={() => addProduct(product)}>
+          <button type="button" value="1" onClick={e => addProduct(product, e.target.value)}>
             Adicionar ao carrinho
           </button>
         </Container>
