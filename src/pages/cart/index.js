@@ -7,11 +7,6 @@ import { Creators as CartActions } from '../../store/ducks/cart';
 import { Container, ShoppingList, SomaTotal } from './styles';
 
 class Cart extends Component {
-  selectQuantity = (e, product) => {
-    const { id } = product;
-    this.props.selectQuantityItem(id, e.target.value);
-  };
-
   render() {
     return (
       <Container>
@@ -45,12 +40,12 @@ class Cart extends Component {
                     <input
                       type="number"
                       value={product.quantity}
-                      onChange={e => this.selectQuantity(e, product)}
+                      onChange={e => this.props.selectQuantity(product, e.target.value)}
                     />
                   </div>
                 </td>
                 <td>
-                  <span>{`R$ ${product.price}`}</span>
+                  <span>{`R$ ${product.subtotal}`}</span>
                 </td>
                 <td>
                   <button

@@ -1,59 +1,70 @@
 export const Types = {
   ADD_TO_CART: 'products/ADD_TO_CART',
-  SELECT_QUANTITY_ITEM: 'products/SELECT_QUANTITY_ITEM',
+  SELECT_QUANTITY: 'products/SELECT_QUANTITY',
   REMOVE_FROM_CART: 'products/REMOVE_FROM_CART',
 };
 
 const INITIAL_STATE = {
-  totalItems: 0,
-  totalPrice: [],
   addedById: [],
 };
 
 export default function cart(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.ADD_TO_CART:
-      if (state.addedById.find(item => item.id === action.payload.product.id) === undefined) {
+      if (state.addedById.find(item => item.id === action.payload.id) === undefined) {
         return {
           ...state,
-          totalItems: state.totalItems + 1,
-          totalPrice: [...state.totalPrice, action.payload.product.price],
           addedById: [
             ...state.addedById,
             {
-              id: action.payload.product.id,
-              name: action.payload.product.name,
-              image: action.payload.product.image,
-              price: action.payload.product.price,
-              brand: action.payload.product.brand,
-              quantity: action.payload.product.quantity,
-              subtotal: action.payload.product.price,
+              id: action.payload.id,
+              name: action.payload.name,
+              image: action.payload.image,
+              price: action.payload.price,
+              brand: action.payload.brand,
+              quantity: action.payload.quantity,
+              subtotal: action.payload.price,
             },
           ],
         };
       }
       return {
         ...state,
-        totalItems: state.totalItems + 1,
-        totalPrice: [...state.totalPrice, action.payload.product.price],
         addedById: [
-          ...state.addedById,
-          state.addedById.find(item => item.id === action.payload.product.id),
+          ...state.addedById.filter(product => product.id !== action.payload.id),
+          {
+            id: action.payload.id,
+            name: action.payload.name,
+            image: action.payload.image,
+            price: action.payload.price,
+            brand: action.payload.brand,
+            quantity: action.payload.quantity + 1,
+            subtotal: action.payload.price,
+          },
         ],
       };
 
-    case Types.SELECT_QUANTITY_ITEM:
+    case Types.SELECT_QUANTITY:
       return {
         ...state,
-        totalItems: state.totalItems + 1,
-        totalPrice: [...state.totalPrice, action.payload.price],
-        addedById: [...state.addedById],
+        addedById: [
+          ...state.addedById.filter(product => product.id !== action.payload.id),
+          {
+            id: action.payload.id,
+            name: action.payload.name,
+            image: action.payload.image,
+            price: action.payload.price,
+            brand: action.payload.brand,
+            quantity: action.payload.quantity,
+            subtotal: action.payload.price * action.payload.quantity,
+          },
+        ],
       };
 
     case Types.REMOVE_FROM_CART:
       return {
         ...state,
-        addedById: [...state.addedById.filter(product => product.id !== action.payload.product.id)],
+        addedById: [...state.addedById.filter(product => product.id !== action.payload.id)],
       };
 
     default:
@@ -62,14 +73,32 @@ export default function cart(state = INITIAL_STATE, action) {
 }
 
 export const Creators = {
-  addProduct: product => ({
+  addProduct: ({
+    id, name, image, price, brand,
+  }, quantity) => ({
     type: Types.ADD_TO_CART,
-    payload: { product },
+    payload: {
+      id,
+      name,
+      image,
+      price,
+      brand,
+      quantity,
+    },
   }),
 
-  selectQuantityItem: (id, quantity = 1) => ({
-    type: Types.SELECT_QUANTITY_ITEM,
-    payload: { id, quantity },
+  selectQuantity: ({
+    id, name, image, price, brand,
+  }, quantity) => ({
+    type: Types.SELECT_QUANTITY,
+    payload: {
+      id,
+      name,
+      image,
+      price,
+      brand,
+      quantity,
+    },
   }),
 
   removeProduct: id => ({

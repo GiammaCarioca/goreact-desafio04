@@ -3,8 +3,8 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Home from '../pages/home';
-import Category from '../pages/category';
-import productDetails from '../pages/productDetails';
+import Category from '../pages/categoryProducts';
+import productDetails from '../pages/detailsProduct';
 import Cart from '../pages/cart';
 
 const Routes = () => (
