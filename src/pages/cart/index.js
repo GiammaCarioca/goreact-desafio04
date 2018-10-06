@@ -43,6 +43,7 @@ const Cart = ({ cart, selectQuantity, removeProduct }) => (
               <div>
                 <input
                   type="number"
+                  min="0"
                   value={product.quantity}
                   onChange={e => selectQuantity(product, e.target.value)}
                 />
