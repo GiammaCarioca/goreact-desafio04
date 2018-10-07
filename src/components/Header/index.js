@@ -24,13 +24,24 @@ class Header extends Component {
         }),
       ),
     }).isRequired,
+    cart: PropTypes.shape({
+      addedById: PropTypes.arrayOf(
+        PropTypes.shape({
+          quantity: PropTypes.string,
+        }),
+      ),
+    }).isRequired,
   };
 
   componentDidMount() {
-    this.props.getCategoriesRequest();
+    const { getCategoriesRequest } = this.props;
+    getCategoriesRequest();
   }
 
   render() {
+    const { cart, categories } = this.props;
+    const { selectedCategory } = this.state;
+
     return (
       <Wrapper>
         <Container>
@@ -42,7 +53,7 @@ class Header extends Component {
             Meu carrinho
             <span>
               (
-              {this.props.cart.addedById
+              {cart.addedById
                 .map(item => parseInt(item.quantity, 10))
                 .reduce((accumulator, currentValue) => accumulator + currentValue, 0)}
               )
@@ -51,12 +62,12 @@ class Header extends Component {
         </Container>
         <Nav>
           <ul>
-            {this.props.categories.data.map(category => (
+            {categories.data.map(category => (
               <li key={category.id}>
                 <Category
                   to={`/category_products/${category.id}`}
                   onClick={() => this.setState({ selectedCategory: category.id })}
-                  selected={this.state.selectedCategory === category.id}
+                  selected={selectedCategory === category.id}
                 >
                   {category.title}
                 </Category>

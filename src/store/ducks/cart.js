@@ -1,3 +1,6 @@
+import update from 'immutability-helper';
+import _ from 'lodash';
+
 export const Types = {
   ADD_TO_CART: 'products/ADD_TO_CART',
   SELECT_QUANTITY: 'products/SELECT_QUANTITY',
@@ -11,7 +14,9 @@ const INITIAL_STATE = {
 export default function cart(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.ADD_TO_CART:
-      if (state.addedById.find(item => item.id === action.payload.id) === undefined) {
+      const item = _.findKey(state.addedById, ['id', action.payload.id]);
+
+      if (!item) {
         return {
           ...state,
           addedById: [
@@ -28,26 +33,25 @@ export default function cart(state = INITIAL_STATE, action) {
           ],
         };
       }
-      return {
-        ...state,
-      };
+      return state;
 
     case Types.SELECT_QUANTITY:
-      return {
-        ...state,
-        addedById: [
-          ...state.addedById.filter(product => product.id !== action.payload.id),
-          {
-            id: action.payload.id,
-            name: action.payload.name,
-            image: action.payload.image,
-            price: action.payload.price,
-            brand: action.payload.brand,
-            quantity: action.payload.quantity,
-            subtotal: action.payload.price * action.payload.quantity,
+      const i = _.findKey(state.addedById, ['id', action.payload.id]);
+
+      if (i) {
+        return update(state, {
+          addedById: {
+            [i]: {
+              quantity: { $set: action.payload.quantity },
+              subtotal: {
+                $set: state.addedById[i].price * action.payload.quantity,
+              },
+            },
           },
-        ],
-      };
+        });
+      }
+
+      return state;
 
     case Types.REMOVE_FROM_CART:
       return {

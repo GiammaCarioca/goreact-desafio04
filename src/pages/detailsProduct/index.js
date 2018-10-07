@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -33,6 +34,26 @@ const Product = ({ products, match, addProduct }) => (
     ))}
   </Wrapper>
 );
+
+Product.propTypes = {
+  addProduct: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
+  products: PropTypes.shape({
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        brand: PropTypes.string,
+        image: PropTypes.string,
+        price: PropTypes.number,
+      }),
+    ),
+  }).isRequired,
+};
 
 const mapStateToProps = state => ({
   products: state.products,

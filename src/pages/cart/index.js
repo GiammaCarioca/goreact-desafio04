@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -76,6 +77,24 @@ const Cart = ({ cart, selectQuantity, removeProduct }) => (
     )}
   </Container>
 );
+
+Cart.propTypes = {
+  selectQuantity: PropTypes.func.isRequired,
+  removeProduct: PropTypes.func.isRequired,
+  cart: PropTypes.shape({
+    addedById: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        image: PropTypes.string,
+        price: PropTypes.number,
+        brand: PropTypes.string,
+        quantity: PropTypes.string,
+        subtotal: PropTypes.number,
+      }),
+    ),
+  }).isRequired,
+};
 
 const mapStateToProps = state => ({
   products: state.products,
